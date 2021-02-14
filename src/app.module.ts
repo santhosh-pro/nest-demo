@@ -7,12 +7,18 @@ import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './infra/database/product/product.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
+import { AutomapperModule } from '@automapper/nestjs';
+import { classes } from '@automapper/classes';
 
 @Module({
   imports: [
     CommonModule,
     UsecasesModule,
     DatabaseModule,
+	AutomapperModule.forRoot({
+		options: [{ name: 'blah', pluginInitializer: classes }],
+		singular: true,
+	  }),
     TypeOrmModule.forRoot({
 			type: 'mysql',
 			host: 'localhost',

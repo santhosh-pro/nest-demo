@@ -10,12 +10,6 @@ export class ProductService extends BaseService<Repository<ProductEntity>,Produc
     ) {
         super(repository);
     }
-    isExpired(id: any): Boolean {
-        throw new Error("Method not implemented.");
-    }
-    doSomething() {
-        throw new Error("Method not implemented.");
-    }
 
     async welocome():Promise<void>{
         console.log('welcome');
