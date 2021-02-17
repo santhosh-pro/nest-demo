@@ -13,4 +13,8 @@ export class ProductEntity extends WhoColumnEntity{
     @Column()
     @AutoMap()
     description:string;
+
+    public setId(id:string) {
+        this.id=id;
+    }
 }

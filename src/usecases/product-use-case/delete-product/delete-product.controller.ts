@@ -9,8 +9,8 @@ export class DeleteProductController {
         @Inject('IProductService') private readonly productService: IProductService,
     ) { }
 
-    @Delete()
-    async execute(@Param() id:string): Promise<void> {
+    @Delete(':id')
+    async execute(@Param('id') id:string): Promise<void> {
         if(!id)
             throw new HttpException('Id not Vaild',HttpStatus.BAD_REQUEST);
 
