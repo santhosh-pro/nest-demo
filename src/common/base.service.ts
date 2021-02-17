@@ -1,5 +1,6 @@
 import { EntityManager, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
 import { IBaseService } from "./i.base.service";
+import { PagedModel } from "./paged-model";
 import { PagedResponse } from "./paged-response";
 import { SortingDirection } from "./sorting-direction";
 
@@ -26,14 +27,14 @@ export class BaseService<TRepository extends Repository<Entity>, Entity> impleme
         .orderBy(orderByPropertyName,orderBy)
         .getManyAndCount();
   
-      const pagedResponse = new PagedResponse({
-        pageNumber:pageNumber,
-        pageSize:pageSize,
-        orderBy:orderBy,
-        orderByPropertyName:orderByPropertyName,
-        itemCount: itemsCount,
-        items:items
-      });
+      const pagedResponse = new PagedModel<Entity>(
+        {pageNumber,
+        pageSize,
+        orderBy,
+        orderByPropertyName,
+        itemsCount,
+        items}
+      );
   
       return pagedResponse;
     }

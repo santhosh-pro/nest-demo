@@ -8,7 +8,7 @@ export class CreateProductMapper {
         const product =new ProductEntity();
         product.name=data.name;
         product.price=data.price;
-        product.description=data.description;
+      //  product.description=data.description;
         return product;
     }
 

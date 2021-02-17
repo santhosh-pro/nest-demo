@@ -1,43 +1,30 @@
+import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
 import { SortingDirection } from './sorting-direction';
-export class PagedResponse<T> {
+export class PagedResponse {
     @ApiProperty()
-    
-    readonly pageNumber!: number;
-
-    @ApiProperty()
-    
-    readonly pageSize!: number;
+    @AutoMap()
+    readonly pageNumber: number;
 
     @ApiProperty()
-    
-    readonly itemCount!: number;
+    @AutoMap()
+    readonly pageSize: number;
 
     @ApiProperty()
-    
-    readonly pageCount!: number;
+    @AutoMap()
+    readonly itemsCount: number;
 
     @ApiProperty()
-    
-    readonly orderBy!: string | SortingDirection;
+    @AutoMap()
+    readonly pageCount: number;
 
     @ApiProperty()
-    
-    readonly orderByPropertyName!: string;
+    @AutoMap()
+    readonly orderBy: string | SortingDirection;
 
     @ApiProperty()
-    
-    readonly items!: T[];
+    @AutoMap()
+    readonly orderByPropertyName: string;
 
 
-
-    constructor({ pageNumber,pageSize,orderBy,orderByPropertyName,itemCount,items }:any) {
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
-        this.itemCount = itemCount;
-        this.orderBy=orderBy;
-        this.orderByPropertyName=orderByPropertyName;
-        this.pageCount = Math.ceil(itemCount / this.pageSize);
-        this.items=items;
-    }
 }
