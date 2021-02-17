@@ -10,24 +10,29 @@ import { GetProductMapper } from './product-use-case/get-product/get-product-map
 import { GetProductController } from './product-use-case/get-product/get-product.controller';
 import { UpdateProductMapper } from './product-use-case/update-product/update-product-mapper';
 import { UpdateProductController } from './product-use-case/update-product/update-product.controller';
-
+/* PLOP_INJECT_IMPORT */
+import { CustomerUseCaseModule } from './customer-use-case/customer-use-case.module';
 @Module({
     imports: [
         CommonModule,
-        DatabaseModule
-    ],
+        DatabaseModule,
+        /* PLOP_INJECT_MODULE */
+		CustomerUseCaseModule,
+     ],
     controllers: [
         CreateProductController,
         GetProductListController,
         DeleteProductController,
         UpdateProductController,
-        GetProductController
+        GetProductController,
     ],
     providers: [
         CreateProductMapper, 
         GetProductListMapper,
         GetProductMapper,
-        UpdateProductMapper
+        UpdateProductMapper,
+
+        
     ],
 })
 export class UsecasesModule {}

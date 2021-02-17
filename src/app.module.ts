@@ -9,17 +9,18 @@ import { ProductEntity } from './infra/database/product/product.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
+import { Customer } from './infra/database/customer/customer.entity';
 
 @Module({
-  imports: [
-    CommonModule,
-    UsecasesModule,
-    DatabaseModule,
-	AutomapperModule.forRoot({
-		options: [{ name: 'blah', pluginInitializer: classes }],
-		singular: true,
-	  }),
-    TypeOrmModule.forRoot({
+	imports: [
+		CommonModule,
+		UsecasesModule,
+		DatabaseModule,
+		AutomapperModule.forRoot({
+			options: [{ name: 'blah', pluginInitializer: classes }],
+			singular: true,
+		}),
+		TypeOrmModule.forRoot({
 			type: 'mysql',
 			host: 'localhost',
 			port: 3306,
@@ -28,13 +29,14 @@ import { classes } from '@automapper/classes';
 			database: 'nest-demo',
 			entities: [
 				ProductEntity,
+				Customer
 			],
 			synchronize: true,
 			logging: ["query", "error"],
 			namingStrategy: new SnakeNamingStrategy(),
 		}),
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+	],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule { }

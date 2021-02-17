@@ -1,19 +1,19 @@
-import { ignore } from "@automapper/core";
+import { ignore, mapFrom } from "@automapper/core";
 import { AutomapperProfile, InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
 import { Injectable } from "@nestjs/common";
-import { ProductEntity } from "src/infra/database/product/product.entity";
-import { CreateProductRequest } from "./create-product-request";
+import { Customer } from "src/infra/database/customer/customer.entity";
+import { UpdateCustomerRequest } from "./update-customer-request";
+
 @Injectable()
-export class CreateProductMapper extends AutomapperProfile {
+export class UpdateCustomerMapper extends AutomapperProfile {
   constructor(@InjectMapper() mapper: Mapper) {
     super(mapper);
   }
 
   mapProfile() {
     return (mapper: Mapper) => {
-
-      mapper.createMap(CreateProductRequest, ProductEntity)
+      mapper.createMap(UpdateCustomerRequest, Customer)
       .forMember(
         (destination) => destination.id,
         ignore()

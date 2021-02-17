@@ -1,4 +1,4 @@
-import { ignore, mapFrom } from "@automapper/core";
+import { ignore } from "@automapper/core";
 import { AutomapperProfile, InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
 import { Injectable } from "@nestjs/common";

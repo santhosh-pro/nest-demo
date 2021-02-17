@@ -16,8 +16,10 @@ export class CreateProductController {
 
     @Post()
     @HttpCode(201)
-    async execute(@Body() request: CreateProductRequest): Promise<void> {
+    async execute(@Body() request: CreateProductRequest): Promise<any> {
+
         const product = this.mapper.map(request, ProductEntity, CreateProductRequest);
-        await this.productService.insert(product);
+        const result = await this.productService.insert(product);
+        return {id:result.id};
     }
 }
