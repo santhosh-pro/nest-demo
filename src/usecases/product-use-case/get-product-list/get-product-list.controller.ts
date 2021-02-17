@@ -1,6 +1,6 @@
 import { InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
-import { Controller, Get, Inject, Query } from "@nestjs/common";
+import { Controller, Get, HttpCode, Inject, Query } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infra/database/product/i.product.service";
 import { ProductPagedModel } from "src/infra/database/product/product-paged-model";
@@ -16,6 +16,7 @@ export class GetProductListController {
     ) { }
 
     @Get()
+    @HttpCode(200)
     async execute(@Query() request: GetProductListRequest): Promise<Partial<GetProductListResponse>> {
 
         const result = await this.productService.getProducts(

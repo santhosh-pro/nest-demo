@@ -1,4 +1,3 @@
-import { mapFrom } from "@automapper/core";
 import { AutomapperProfile, InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
 import { Injectable } from "@nestjs/common";
@@ -15,11 +14,7 @@ export class GetProductListMapper extends AutomapperProfile {
 
   mapProfile() {
     return (mapper: Mapper) => {
-      mapper.createMap(ProductEntity, GetProductBase)
-      .forMember(
-        (destination) => destination.name,
-        mapFrom((source) => source.name  + ' Wrks')
-      );
+      mapper.createMap(ProductEntity, GetProductBase);
 
       mapper.createMap(ProductPagedModel, GetProductListResponse);
     };

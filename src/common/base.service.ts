@@ -1,46 +1,46 @@
-import { EntityManager, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
+import { DeleteResult, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
 import { IBaseService } from "./i.base.service";
 import { PagedModel } from "./paged-model";
 import { SortingDirection } from "./sorting-direction";
 
-export class BaseService<TRepository extends Repository<Entity>, Entity> implements IBaseService<Entity>{
+export class BaseService<TRepository extends Repository<TEntity>, TEntity> implements IBaseService<TEntity>{
   constructor(protected readonly repository: TRepository) {
   }
 
-  async isExistsById(id: string | number, options?: FindOneOptions<Entity>): Promise<boolean> {
+  async findById(id: number | string, options?: FindOneOptions<TEntity>) {
     if (options) {
-      const result =await this.repository.findOne(id, options);
+      return await this.repository.findOne(id, options);
+    } else {
+      return await this.repository.findOne(id);
+    }
+  }
+
+  async findOne(options?: FindOneOptions<TEntity> | FindConditions<TEntity>): Promise<TEntity> {
+    return await this.repository.findOne(options);
+  }
+
+  async isExistsById(id: string | number, options?: FindOneOptions<TEntity>): Promise<boolean> {
+    if (options) {
+      const result = await this.repository.findOne(id, options);
       if (!result)
         return false;
       return true;
     } else {
-      const result =await this.repository.findOne(id);
+      const result = await this.repository.findOne(id);
       if (!result)
         return false;
       return true;
     }
   }
 
-  findById(id: number | string, options?: FindOneOptions<Entity>) {
-    if (options) {
-      return this.repository.findOne(id, options);
-    } else {
-      return this.repository.findOne(id);
-    }
-  }
-
-  findOne(options?: FindOneOptions<Entity> | FindConditions<Entity>): Promise<any> {
-    return this.repository.findOne(options);
-  }
-
-  async paged(queryBuilder: SelectQueryBuilder<Entity>, pageNumber: number, pageSize: number, orderBy:SortingDirection, orderByPropertyName: string) {
+  async paged(queryBuilder: SelectQueryBuilder<TEntity>, pageNumber: number, pageSize: number, orderBy: SortingDirection, orderByPropertyName: string): Promise<PagedModel<TEntity>> {
     const [items, itemsCount] = await queryBuilder
       .skip((pageNumber - 1) * pageSize)
       .take(pageSize)
       .orderBy(orderByPropertyName, orderBy)
       .getManyAndCount();
 
-    const pagedResponse = new PagedModel<Entity>(
+    const pagedResponse = new PagedModel<TEntity>(
       {
         pageNumber,
         pageSize,
@@ -55,38 +55,38 @@ export class BaseService<TRepository extends Repository<Entity>, Entity> impleme
   }
 
 
-  create(record: Partial<Entity>) {
-    const doc = this.repository.create(record as Entity);
-    return this.repository.save(doc);
+  async insert(record: TEntity): Promise<TEntity> {
+    const doc = this.repository.create(record as TEntity);
+    return await this.repository.save(doc);
   }
 
 
-  createMany(records: Partial<Entity[]>) {
-    const docs = this.repository.create(records as Entity[]);
-    return this.repository.save(docs);
+  async insertMany(records:TEntity[]): Promise<TEntity[]> {
+    const docs = this.repository.create(records as TEntity[]);
+    return await this.repository.save(docs);
   }
 
 
-  updateById(id: number | string, record: Partial<Entity>): Promise<UpdateResult> {
-    return this.repository.update(id, record as Entity);
+  async updateById(id: number | string, record: TEntity): Promise<UpdateResult> {
+    return await this.repository.update(id, record as TEntity);
   }
 
 
-  updateMany(criteria: FindConditions<Entity>, record: Partial<Entity>) {
-    return this.repository.update(criteria, record as Entity);
+  async updateMany(criteria: FindConditions<TEntity>, record: TEntity): Promise<UpdateResult> {
+    return await this.repository.update(criteria, record as TEntity);
   }
 
 
-  deleteById(id: number | string) {
-    return this.repository.delete(id);
+  async deleteById(id: number | string): Promise<DeleteResult> {
+    return await this.repository.delete(id);
   }
 
-  delete(criteria: FindConditions<Entity>) {
-    return this.repository.delete(criteria);
+  async deleteMany(criteria: FindConditions<TEntity>): Promise<DeleteResult> {
+    return await this.repository.delete(criteria);
   }
 
 
-  createQueryBuilder(alias = ''): SelectQueryBuilder<Entity> {
+  createQueryBuilder(alias = ''): SelectQueryBuilder<TEntity> {
     return this.repository.createQueryBuilder(alias);
   }
 

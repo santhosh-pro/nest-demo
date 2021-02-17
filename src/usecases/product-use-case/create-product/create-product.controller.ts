@@ -1,6 +1,6 @@
 import { InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
-import { Body, Controller, Inject, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, Inject, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infra/database/product/i.product.service";
 import { ProductEntity } from "src/infra/database/product/product.entity";
@@ -15,10 +15,9 @@ export class CreateProductController {
     ) { }
 
     @Post()
+    @HttpCode(201)
     async execute(@Body() request: CreateProductRequest): Promise<void> {
         const product = this.mapper.map(request, ProductEntity, CreateProductRequest);
-        await this.productService.create(product);
-
-        // return null;
+        await this.productService.insert(product);
     }
 }

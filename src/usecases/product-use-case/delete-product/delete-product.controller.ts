@@ -1,4 +1,4 @@
-import { Controller, Delete, HttpException, HttpStatus, Inject, Param } from "@nestjs/common";
+import { Controller, Delete, HttpCode, HttpException, HttpStatus, Inject, Param } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infra/database/product/i.product.service";
 
@@ -10,11 +10,12 @@ export class DeleteProductController {
     ) { }
 
     @Delete(':id')
+    @HttpCode(204)
     async execute(@Param('id') id: string): Promise<void> {
         const isExists = await this.productService.isExistsById(id);
         if (!isExists)
             throw new HttpException('Product Not Found', HttpStatus.BAD_REQUEST);
 
-        const product = await this.productService.deleteById(id);
+        await this.productService.deleteById(id);
     }
 }

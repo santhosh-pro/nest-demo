@@ -1,6 +1,6 @@
 import { InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
-import { Body, Controller, Inject, Param, Put } from "@nestjs/common";
+import { Body, Controller, HttpException, HttpStatus, Inject, Param, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infra/database/product/i.product.service";
 import { ProductEntity } from "src/infra/database/product/product.entity";
@@ -16,6 +16,10 @@ export class UpdateProductController {
 
     @Put(':id')
     async execute(@Param('id') id: string, @Body() request: UpdateProductRequest): Promise<void> {
+        const isExists = await this.productService.isExistsById(id);
+        if(!isExists)
+            throw new HttpException('Product Not Found',HttpStatus.BAD_REQUEST);
+            
         const product = this.mapper.map(request, ProductEntity, UpdateProductRequest);
         product.setId(id);
         await this.productService.updateById(id, product);
