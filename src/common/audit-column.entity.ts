@@ -1,7 +1,7 @@
 import { AutoMap } from '@automapper/classes';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export class WhoColumnEntity {
+export class AuditColumn {
     @PrimaryGeneratedColumn('uuid')
     @AutoMap()
     id!: string;

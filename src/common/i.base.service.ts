@@ -4,6 +4,7 @@ import { SortingDirection } from "./sorting-direction";
 export interface IBaseService<T> {
     findById(id: number | string, options?: FindOneOptions<T>):any;
     findOne(options?: FindOneOptions<T> | FindConditions<T>): Promise<T>;
+    isExistsById(id: number | string, options?: FindOneOptions<T>):Promise<boolean>;
     paged(queryBuilder: SelectQueryBuilder<T>,pageNumber:number,pageSize:number,orderBy:SortingDirection,orderByPropertyName:string):any;
     create(record: Partial<T>):any;
     createMany(records: Partial<T[]>):any;

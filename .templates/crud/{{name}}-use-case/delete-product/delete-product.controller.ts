@@ -10,11 +10,10 @@ export class DeleteProductController {
     ) { }
 
     @Delete(':id')
-    async execute(@Param('id') id: string): Promise<void> {
-        const isExists = await this.productService.isExistsById(id);
-        if (!isExists)
-            throw new HttpException('Product Not Found', HttpStatus.BAD_REQUEST);
+    async execute(@Param('id') id:string): Promise<void> {
+        if(!id)
+            throw new HttpException('Id not Vaild',HttpStatus.BAD_REQUEST);
 
-        const product = await this.productService.deleteById(id);
+       const product= await this.productService.deleteById(id);
     }
 }

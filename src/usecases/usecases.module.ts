@@ -6,6 +6,8 @@ import { CreateProductController } from './product-use-case/create-product/creat
 import { DeleteProductController } from './product-use-case/delete-product/delete-product.controller';
 import { GetProductListMapper } from './product-use-case/get-product-list/get-product-list-mapper';
 import { GetProductListController } from './product-use-case/get-product-list/get-product-list.controller';
+import { GetProductMapper } from './product-use-case/get-product/get-product-mapper';
+import { GetProductController } from './product-use-case/get-product/get-product.controller';
 import { UpdateProductMapper } from './product-use-case/update-product/update-product-mapper';
 import { UpdateProductController } from './product-use-case/update-product/update-product.controller';
 
@@ -18,11 +20,13 @@ import { UpdateProductController } from './product-use-case/update-product/updat
         CreateProductController,
         GetProductListController,
         DeleteProductController,
-        UpdateProductController
+        UpdateProductController,
+        GetProductController
     ],
     providers: [
         CreateProductMapper, 
         GetProductListMapper,
+        GetProductMapper,
         UpdateProductMapper
     ],
 })
