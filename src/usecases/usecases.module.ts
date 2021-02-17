@@ -9,8 +9,15 @@ import { GetProductListController } from './product-use-case/get-product-list/ge
 @Module({
     imports: [
         CommonModule,
-        DatabaseModule],
-    controllers: [CreateProductController, GetProductListController],
-    providers: [CreateProductMapper, GetProductListMapper],
+        DatabaseModule
+    ],
+    controllers: [
+        CreateProductController,
+        GetProductListController
+    ],
+    providers: [
+        CreateProductMapper, 
+        GetProductListMapper
+    ],
 })
 export class UsecasesModule {}
