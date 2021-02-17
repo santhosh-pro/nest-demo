@@ -1,7 +1,9 @@
+import { AutoMap } from '@automapper/classes';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export class WhoColumnEntity {
     @PrimaryGeneratedColumn('uuid')
+    @AutoMap()
     id!: string;
     
     @Column({select: false})

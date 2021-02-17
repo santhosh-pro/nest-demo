@@ -8,7 +8,7 @@ export class ProductBase {
     @ApiProperty()
     @AutoMap()
     price:number;
-    // @ApiProperty()
-    // @AutoMap()
-    // description:string;
+    @ApiProperty()
+    @AutoMap()
+    description:string;
 }

@@ -10,7 +10,7 @@ export class PagedModel<T> {
     readonly pageSize: number;
 
     @ApiProperty()
-    readonly itemCount: number;
+    readonly itemsCount: number;
 
     @ApiProperty()
     readonly pageCount: number;
@@ -26,13 +26,13 @@ export class PagedModel<T> {
 
 
 
-    constructor({ pageNumber,pageSize,orderBy,orderByPropertyName,itemCount,items }:any) {
+    constructor({ pageNumber,pageSize,orderBy,orderByPropertyName,itemsCount,items }:any) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
-        this.itemCount = itemCount;
+        this.itemsCount = itemsCount;
         this.orderBy=orderBy;
         this.orderByPropertyName=orderByPropertyName;
-        this.pageCount = Math.ceil(itemCount / this.pageSize);
+        this.pageCount = Math.ceil(itemsCount / this.pageSize);
         this.items=items;
     }
 }

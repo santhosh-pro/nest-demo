@@ -2,9 +2,8 @@ import { InjectMapper } from "@automapper/nestjs";
 import { Mapper } from "@automapper/types";
 import {Controller, Get, Inject, Query } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { PagedModel } from "src/common/paged-model";
-import { PagedResponse } from "src/common/paged-response";
 import { IProductService } from "src/infra/database/product/i.product.service";
+import { ProductPagedModel } from "./get-product-list-profile";
 import { GetProductListRequest } from "./get-product-list-request";
 import { GetProductListResponse } from "./get-product-list-response";
 
@@ -28,7 +27,7 @@ export class GetProductListController {
             request.orderBy,
             request.orderByPropertyName
         );
-        const response = this.mapper.map(result,GetProductListResponse,PagedResponse);
+        const response = this.mapper.map(result,GetProductListResponse,ProductPagedModel);
         return response;
     }
 }

@@ -27,13 +27,13 @@ export class BaseService<TRepository extends Repository<Entity>, Entity> impleme
         .orderBy(orderByPropertyName,orderBy)
         .getManyAndCount();
   
-      const pagedResponse = new PagedResponse(
-        pageNumber,
+      const pagedResponse = new PagedModel<Entity>(
+        {pageNumber,
         pageSize,
         orderBy,
         orderByPropertyName,
         itemsCount,
-        items
+        items}
       );
   
       return pagedResponse;
