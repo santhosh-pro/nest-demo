@@ -2,8 +2,8 @@ import { AutoMap } from "@automapper/classes";
 import { AuditColumn } from "src/common/audit-column.entity";
 import { Column, Entity } from "typeorm";
 
-@Entity({name:'product'})
-export class ProductEntity extends AuditColumn{
+@Entity()
+export class Product extends AuditColumn{
     @Column()
     @AutoMap()
     name:string;

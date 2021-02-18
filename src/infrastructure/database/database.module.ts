@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from 'src/common/common.module';
 import { Customer } from './customer/customer.entity';
 import { CustomerService } from './customer/customer.service';
-import { ProductEntity } from './product/product.entity';
+import { Product } from './product/product.entity';
 import { ProductService } from './product/product.service';
 /* PLOP_INJECT_IMPORT */
 import { Payment } from './payment/payment.entity';
@@ -13,7 +13,7 @@ import { PaymentService } from './payment/payment.service';
     imports: [
         CommonModule,
         TypeOrmModule.forFeature([
-            ProductEntity,
+            Product,
             Customer,
             /* PLOP_INJECT_ENTITY */
 Payment,

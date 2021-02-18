@@ -4,11 +4,11 @@ import { SortingDirection } from "src/common/sorting-direction";
 import { Repository } from "typeorm";
 import { IProductService } from "./i.product.service";
 import { ProductPagedModel } from "./product-paged-model";
-import { ProductEntity } from "./product.entity";
+import { Product } from "./product.entity";
 
-export class ProductService extends BaseService<Repository<ProductEntity>, ProductEntity> implements IProductService {
+export class ProductService extends BaseService<Repository<Product>, Product> implements IProductService {
     constructor(
-        @InjectRepository(ProductEntity) protected readonly repository: Repository<ProductEntity>
+        @InjectRepository(Product) protected readonly repository: Repository<Product>
     ) {
         super(repository);
     }

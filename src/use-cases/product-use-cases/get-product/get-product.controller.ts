@@ -3,7 +3,7 @@ import { Mapper } from "@automapper/types";
 import { Controller, Get, HttpCode, HttpException, HttpStatus, Inject, Param } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infrastructure/database/product/i.product.service";
-import { ProductEntity } from "src/infrastructure/database/product/product.entity";
+import { Product } from "src/infrastructure/database/product/product.entity";
 import { GetProductResponse } from "./get-product-response";
 
 @ApiTags('products')
@@ -21,7 +21,7 @@ export class GetProductController {
         if(!product)
             throw new HttpException('Product Not Found',HttpStatus.BAD_REQUEST);
             
-        const response = this.mapper.map(product, GetProductResponse,ProductEntity );
+        const response = this.mapper.map(product, GetProductResponse,Product );
         return response;
     }
 }

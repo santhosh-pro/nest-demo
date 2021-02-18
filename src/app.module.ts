@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductEntity } from './infrastructure/database/product/product.entity';
+import { Product } from './infrastructure/database/product/product.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
@@ -29,7 +29,7 @@ import { Payment } from './infrastructure/database/payment/payment.entity';
 			password: 'computer',
 			database: 'nest-demo',
 			entities: [
-				ProductEntity,
+				Product,
 				Customer,
 				Payment
 			],

@@ -3,7 +3,7 @@ import { Mapper } from "@automapper/types";
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Inject, Param, Put } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { IProductService } from "src/infrastructure/database/product/i.product.service";
-import { ProductEntity } from "src/infrastructure/database/product/product.entity";
+import { Product } from "src/infrastructure/database/product/product.entity";
 import { UpdateProductRequest } from "./update-product-request";
 
 @ApiTags('products')
@@ -21,7 +21,7 @@ export class UpdateProductController {
         if(!isExists)
             throw new HttpException('Product Not Found',HttpStatus.BAD_REQUEST);
             
-        const product = this.mapper.map(request, ProductEntity, UpdateProductRequest);
+        const product = this.mapper.map(request, Product, UpdateProductRequest);
         product.setId(id);
         await this.productService.updateById(id, product);
     }
