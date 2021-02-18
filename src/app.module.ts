@@ -1,20 +1,21 @@
-import { UsecasesModule } from './usecases/usecases.module';
-import { DatabaseModule } from './infra/database/database.module';
+import { UseCasesModule } from './use-cases/use-cases.module';
+import { DatabaseModule } from './infrastructure/database/database.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductEntity } from './infra/database/product/product.entity';
+import { ProductEntity } from './infrastructure/database/product/product.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
-import { Customer } from './infra/database/customer/customer.entity';
+import { Customer } from './infrastructure/database/customer/customer.entity';
+import { Payment } from './infrastructure/database/payment/payment.entity';
 
 @Module({
 	imports: [
 		CommonModule,
-		UsecasesModule,
+		UseCasesModule,
 		DatabaseModule,
 		AutomapperModule.forRoot({
 			options: [{ name: 'blah', pluginInitializer: classes }],
@@ -29,7 +30,8 @@ import { Customer } from './infra/database/customer/customer.entity';
 			database: 'nest-demo',
 			entities: [
 				ProductEntity,
-				Customer
+				Customer,
+				Payment
 			],
 			synchronize: true,
 			logging: ["query", "error"],
