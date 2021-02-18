@@ -1,4 +1,4 @@
-import { DeleteResult, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
+import { DeleteResult, FindConditions, FindOneOptions, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
 import { IBaseService } from "./i.base.service";
 import { PagedModel } from "./paged-model";
 import { SortingDirection } from "./sorting-direction";

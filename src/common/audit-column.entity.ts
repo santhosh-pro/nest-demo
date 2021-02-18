@@ -1,5 +1,5 @@
 import { AutoMap } from '@automapper/classes';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export class AuditColumn {
     @PrimaryGeneratedColumn('uuid')

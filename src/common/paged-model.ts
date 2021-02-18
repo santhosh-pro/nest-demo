@@ -1,4 +1,3 @@
-import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
 import { SortingDirection } from "./sorting-direction";
 
