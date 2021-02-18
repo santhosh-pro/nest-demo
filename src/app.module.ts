@@ -11,7 +11,6 @@ import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { Customer } from './infrastructure/database/customer/customer.entity';
 import { Payment } from './infrastructure/database/payment/payment.entity';
-
 @Module({
 	imports: [
 		CommonModule,

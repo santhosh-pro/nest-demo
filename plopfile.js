@@ -15,9 +15,9 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'addMany',
-        base: '.templates/crud/',
+        base: '.templates/use-cases/crud/',
         destination: process.cwd(),
-        templateFiles: '.templates/crud/'
+        templateFiles: '.templates/use-cases/crud/'
       },
       {
         type: 'append',
@@ -44,9 +44,9 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'addMany',
-        base: '.templates/entity/',
+        base: '.templates/infrastructure/entity/',
         destination: process.cwd(),
-        templateFiles: '.templates/entity/'
+        templateFiles: '.templates/infrastructure/entity/'
       },
       {
         type: 'append',
