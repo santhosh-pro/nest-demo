@@ -5,19 +5,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from './infrastructure/database/product/product.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
-import { Customer } from './infrastructure/database/customer/customer.entity';
-import { Payment } from './infrastructure/database/payment/payment.entity';
 @Module({
 	imports: [
 		CommonModule,
 		UseCasesModule,
 		DatabaseModule,
 		AutomapperModule.forRoot({
-			options: [{ name: 'blah', pluginInitializer: classes }],
+			options: [{ name: 'mapper', pluginInitializer: classes }],
 			singular: true,
 		}),
 		TypeOrmModule.forRoot({
@@ -28,9 +25,6 @@ import { Payment } from './infrastructure/database/payment/payment.entity';
 			password: 'computer',
 			database: 'nest-demo',
 			entities: [
-				Product,
-				Customer,
-				Payment
 			],
 			synchronize: true,
 			logging: ["query", "error"],

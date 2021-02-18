@@ -1,8 +1,6 @@
 import { EventSubscriber, EntitySubscriberInterface, InsertEvent, Connection } from 'typeorm'
 import { InjectConnection } from '@nestjs/typeorm'
 import { AuditColumn } from 'src/common/audit-column.entity'
-
-
 @EventSubscriber()
 export class AllEntitiesSubscriber implements EntitySubscriberInterface {
     
