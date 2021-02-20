@@ -1,6 +1,6 @@
 module.exports = function (plop) {
 
-  plop.setGenerator('CRUD', {
+  plop.setGenerator('crud', {
     description: 'Generate CRUD Operation!',
     prompts: [{
       type: 'input',
@@ -34,7 +34,7 @@ module.exports = function (plop) {
     ]
   });
 
-  plop.setGenerator('Entity', {
+  plop.setGenerator('entity', {
     description: 'Generate Entity Code!',
     prompts: [{
       type: 'input',
